@@ -1,0 +1,34 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Meu Site Django{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Cabeçalho do site -->
+    <header>
+        <h1>Bem-vindos ao site inseguro</h1>
+        <!-- Menu de navegação -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'exemplo' %}">Exemplo</a></li>
+                <li><a href="{% url 'contato' %}">Contato</a></li>
+                <li><a href="{% url 'phising' %}">Ataques Phising</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Conteúdo principal -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <!-- Rodapé do site -->
+    <footer>
+        <p>&copy; Site inseguro versão 1.0</p>
+    </footer>
+</body>
+</html>

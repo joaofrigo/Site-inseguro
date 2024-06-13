@@ -1,0 +1,7 @@
+cd "C:\Users\joaof\Desktop\site inseguro\Site-inseguro"
+Set-ExecutionPolicy RemoteSigned -Scope Process
+virtual\Scripts\activate
+
+cd site_inseguro_projeto
+
+python manage.py runserver
