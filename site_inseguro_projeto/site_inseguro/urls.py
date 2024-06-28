@@ -11,6 +11,9 @@ urlpatterns = [
     path('phising/', phising_view, name='phising'),
     path('phising_facebook', phising_facebook_view, name = 'phising_facebook'),
     path('facebook_login/', facebook_login, name='facebook_login'),
+    path('phising_instagram/', phising_instagram_view, name='phising_instagram'),
+    path('mostrar-info-usuario/', mostrar_info_usuario, name='mostrar_info_usuario'),
+    path('limpar-sessao/', limpar_sessao, name='limpar_sessao'),
     #path('meu_aplicativo/', include('meu_aplicativo.urls')),
     #path('index/', index, name = 'index'),
     #path('charts/', charts, name = 'charts')

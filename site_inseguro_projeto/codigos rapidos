@@ -3,5 +3,14 @@ Set-ExecutionPolicy RemoteSigned -Scope Process
 virtual\Scripts\activate
 
 cd site_inseguro_projeto
-
 python manage.py runserver
+
+cd C:\Users\joaof\Desktop\site inseguro\Site-inseguro
+git commit -m
+
+o comando só pode ser utilizado em terminais que aceitam curl, como o git bash, ou linux no geral
+curl -H "X-Forwarded-For: 189.72.57.45" http://127.0.0.1:8000/
+O forwarded emite um ip de mentirinha pro servidor que daí pega a informação
+
+Preciso achar uma forma de criar um dicionario big que tenha todas as requisições salvas nele, possivelmente evitando redundâncias.
+Para conseguir copiar todo uma pagina no html, só preciso apertar com botão direito no html e "edit as html" depois ctrl a

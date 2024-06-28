@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'site_inseguro.middlewares.CapturaInfoUsuarioMiddleware', 
 ]
 
 ROOT_URLCONF = 'site_inseguro_projeto.urls'

