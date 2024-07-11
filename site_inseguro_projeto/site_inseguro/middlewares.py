@@ -12,6 +12,7 @@ class CapturaInfoUsuarioMiddleware(MiddlewareMixin):
             request.session['session_id'] = str(uuid.uuid4())
 
         # Captura informações básicas do usuário
+        # ip_address = request.META.get('REMOTE_ADDR')
         ip_address = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
         user_agent_str = request.META.get('HTTP_USER_AGENT', 'Desconhecido')
         referer = request.META.get('HTTP_REFERER', 'Desconhecido')
@@ -63,9 +64,6 @@ class CapturaInfoUsuarioMiddleware(MiddlewareMixin):
             'hostname': hostname,
             'hostname_resolved': hostname_resolved,
             'isp': isp,
-            'login_email': '.',
-            'login_senha': '.',
-            'login_time': '.',
         }
 
         # Inicializa a lista info_usuario_lista na sessão, se ainda não estiver inicializada

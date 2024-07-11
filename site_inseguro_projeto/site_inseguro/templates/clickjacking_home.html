@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Página Clickjacking</h2>
+    <p>Escolha uma pagina à sua escolha</p>
+    <nav>
+        <ul>
+            <li><a href="{% url 'clickjacking_1' %}">clickjacking_1 simplório</a></li>
+            <li><a href="{% url 'clickjacking_2' %}">clickjacking_2 chatinho</a></li>
+        </ul>
+    </nav>
+{% endblock %}

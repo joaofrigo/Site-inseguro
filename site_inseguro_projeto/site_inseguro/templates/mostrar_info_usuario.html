@@ -1,4 +1,7 @@
+<!-- templates/mostrar_info_usuario.html -->
 {% extends 'base.html' %}
+
+{% block title %}Informações do Usuário{% endblock %}
 
 {% block content %}
 <head>
@@ -11,6 +14,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px; /* Adiciona um espaço entre as tabelas */
         }
         table, th, td {
             border: 1px solid black;
@@ -42,6 +46,9 @@
         </table>
         <br>
     {% endfor %}
+    
+    <h2>Teclas Pressionadas</h2>
+    <p>{{ keys_pressed }}</p>
     
 </body>
 {% endblock %}

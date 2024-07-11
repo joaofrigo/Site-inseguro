@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Meu Site Django{% endblock %}</title>
-    {% load static %}
 </head>
 <body>
     <!-- Cabeçalho do site -->
@@ -17,6 +16,7 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'exemplo' %}">Exemplo</a></li>
                 <li><a href="{% url 'contato' %}">Contato</a></li>
+                <li><a href="{% url 'clickjacking' %}">Clickjacking</a></li>
                 <li><a href="{% url 'phising' %}">Ataques Phising</a></li>
                 <li><a href="{% url 'mostrar_info_usuario' %}">Informações adquiridas</a></li>
                 <li><a href="{% url 'limpar_sessao' %}">Limpar Sessão</a></li>
